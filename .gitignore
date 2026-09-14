@@ -1,0 +1,27 @@
+# Python virtual environments
+.venv/
+venv/
+
+# Python cache and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Generated ETL output
+/data/output/*
+!/data/output/.gitkeep
+
+# Downloaded source HTML files
+/data/input/*.html
+/data/input/*.htm
+!/data/input/.gitkeep
+
+# Local editor files
+.vscode/*.log

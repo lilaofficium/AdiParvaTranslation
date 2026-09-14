@@ -1,0 +1,24 @@
+{
+    "sources": [
+        {
+            "id": "mahabharata-k-01-sa",
+            "name": "Mahabharata Adi Parva - Sanskrit Documents",
+            "url": "https://sanskritdocuments.org/mirrors/mahabharata/mbhK/mahabharata-k-01-sa.html",
+            "source_type": "html",
+            "request_method": "GET",
+            "encoding": "utf-8",
+            "local_file": "data/input/mahabharata-k-01-sa.html",
+            "parser": "html",
+            "content_type": "text/html",
+            "language": "sa",
+            "status": "active",
+            "notes": "HTML page containing Adi Parva chapters 001 through 260.",
+            "extraction": {
+                "record_unit": "chapter_or_verse",
+                "source_selector": "TO_BE_CONFIRMED",
+                "translation_selector": "TO_BE_CONFIRMED",
+                "section_selector": "TO_BE_CONFIRMED"
+            }
+        }
+    ]
+}

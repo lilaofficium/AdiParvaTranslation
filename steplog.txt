@@ -50,3 +50,28 @@ Future workflow
 3. Run the ETL pipeline.
 4. Save the generated database in data/output.
 5. Run the tests.
+
+Metadata and source chain
+-------------------------
+
+config/source_manifest.json
+	Machine-readable source configuration. Add one object for each URL, including URL, source type, encoding, local file, parser, and extraction fields.
+
+docs/source_catalog.md
+	Human-readable source table and detailed notes for every URL, HTML format, storage path, request requirements, and parser details.
+
+.gitignore
+	Excludes the virtual environment, caches, downloaded HTML input files, generated database output, secrets, and editor logs.
+
+Recommended processing chain
+	1. source_manifest.json identifies the URL and source format.
+	2. api_reader.py downloads the HTML response.
+	3. data/input/ stores the downloaded HTML temporarily.
+	4. parser.py extracts normalized translation records.
+	5. database.py saves normalized records to data/output/.
+	6. docs/source_catalog.md records human-readable source and parsing details.
+
+Metadata can be divided safely:
+	- JSON is for code and automation.
+	- Markdown is for people and detailed documentation.
+	- Python files contain processing logic, not source-specific metadata.

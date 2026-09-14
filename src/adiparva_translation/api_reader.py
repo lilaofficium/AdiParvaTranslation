@@ -1,8 +1,64 @@
-# api_reader.py responsibilities
-#
-# 1. Import the HTTP client that the project will use, for example:
-#       import requests
-#    Add that package to requirements.txt if it is not part of Python's standard library.
+import requests
+import json
+from pathlib import Path
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+MANIFEST_PATH = PROJECT_ROOT / "config" / "source_manifest.json"
+
+
+def load_source_config(manifest_path=MANIFEST_PATH):
+    """Load the first active source configuration from the JSON manifest."""
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    active_sources = [
+        source for source in manifest["sources"] if source.get("status") == "active"
+    ]
+    if not active_sources:
+        raise ValueError("No active source found in the source manifest.")
+    return active_sources[0]
+
+
+def read_from_api(url, parameters=None, headers=None):
+    print(f"Fetching data from API: {url}")
+    request_headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/131.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    if headers:
+        request_headers.update(headers)
+
+    try:
+        response = requests.get(
+            url,
+            params=parameters,
+            headers=request_headers,
+            timeout=30,
+        )
+        response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
+        return response.text  # Convert the response to text
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data from API: {e}")
+        return None
+
+
+if __name__ == "__main__":
+    source = load_source_config()
+    response = read_from_api(source["url"])
+
+    if response is not None:
+        output_path = PROJECT_ROOT / source["local_file"]
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(response, encoding=source.get("encoding", "utf-8"))
+        print(f"Saved HTML file to: {output_path}")
+    else:
+        print("HTML file was not saved because the request failed.")
+
+
 #
 # 2. Define the API URL as a constant or receive it as a function argument.
 #    Do not hard-code private API keys in this file. Read secrets from environment variables.
