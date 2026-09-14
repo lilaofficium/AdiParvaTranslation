@@ -1,0 +1,52 @@
+Step 1 - Planned project structure
+===================================
+
+Project: AdiParvaTranslation
+Purpose: Read translation HTML files and save extracted records into a SQLite database.
+
+No project folders or implementation files have been created yet. This file is the project plan for adding them later.
+
+Planned folders and files
+-------------------------
+
+data/input/
+	Place source HTML files here.
+
+data/output/
+	Store the generated SQLite database here.
+
+src/adiparva_translation/
+	Python application package.
+
+src/adiparva_translation/html_reader.py
+	Find and read HTML files from data/input.
+
+src/adiparva_translation/parser.py
+	Parse HTML and create translation records.
+
+src/adiparva_translation/database.py
+	Create the translations table and save records to SQLite.
+
+src/adiparva_translation/pipeline.py
+	Coordinate reading, parsing, and database saving.
+
+tests/test_parser.py
+	Test HTML parsing and extracted translation values.
+
+.vscode/settings.json
+	Configure Python source paths and test discovery.
+
+requirements.txt
+	List Python dependencies such as BeautifulSoup and pytest.
+
+README.md
+	Document setup, usage, HTML format, and testing.
+
+Future workflow
+---------------
+
+1. Create the planned folders and files.
+2. Put source HTML files in data/input.
+3. Run the ETL pipeline.
+4. Save the generated database in data/output.
+5. Run the tests.
