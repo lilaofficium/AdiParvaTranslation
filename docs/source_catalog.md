@@ -53,3 +53,7 @@ This file documents every external source used by the ETL project. Add one secti
 4. Set the local file path and parser name.
 5. Record the HTML selectors or JSON field paths after inspecting the source.
 6. Add or update the parser chain if the new source format differs.
+
+
+
+<!-- https://bombay.indology.info/mahabharata/welcome.html?utm_source=chatgpt.com -->

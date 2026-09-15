@@ -1,14 +1,14 @@
 import requests
 import json
-from pathlib import Path
+from pathlib import Path 
+from .file_manager import save_html
 
-
+ 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_PATH = PROJECT_ROOT / "config" / "source_manifest.json"
 
 
-def load_source_config(manifest_path=MANIFEST_PATH):
-    """Load the first active source configuration from the JSON manifest."""
+def load_source_config(manifest_path=MANIFEST_PATH): 
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     active_sources = [
         source for source in manifest["sources"] if source.get("status") == "active"
@@ -19,7 +19,7 @@ def load_source_config(manifest_path=MANIFEST_PATH):
 
 
 def read_from_api(url, parameters=None, headers=None):
-    print(f"Fetching data from API: {url}")
+    # print(f"Fetching data from API: {url}")
     request_headers = {
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -42,7 +42,7 @@ def read_from_api(url, parameters=None, headers=None):
         response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
         return response.text  # Convert the response to text
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching data from API: {e}")
+        # print(f"Error fetching data from API: {e}")
         return None
 
 
@@ -52,11 +52,16 @@ if __name__ == "__main__":
 
     if response is not None:
         output_path = PROJECT_ROOT / source["local_file"]
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(response, encoding=source.get("encoding", "utf-8"))
-        print(f"Saved HTML file to: {output_path}")
+        save_html(
+            output_path.parent,
+            output_path.name,
+            response,
+            encoding=source.get("encoding", "utf-8"),
+        )
+        # print(f"Saved HTML file to: {output_path}")
     else:
-        print("HTML file was not saved because the request failed.")
+        # print("HTML file was not saved because the request failed.")
+        pass
 
 
 #

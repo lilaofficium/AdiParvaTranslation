@@ -1,13 +1,13 @@
 {
     "sources": [
         {
-            "id": "mahabharata-k-01-sa",
-            "name": "Mahabharata Adi Parva - Sanskrit Documents",
-            "url": "https://sanskritdocuments.org/mirrors/mahabharata/mbhK/mahabharata-k-01-sa.html",
+            "id": "mahabharata",
+            "name": "Mahabharata",
+            "url": "https://sanskritdocuments.org/mirrors/mahabharata/mahabharata-sarit.html",
             "source_type": "html",
             "request_method": "GET",
             "encoding": "utf-8",
-            "local_file": "data/input/mahabharata-k-01-sa.html",
+            "local_file": "data/input/mahabharata.html",
             "parser": "html",
             "content_type": "text/html",
             "language": "sa",

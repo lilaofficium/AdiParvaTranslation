@@ -1,4 +1,6 @@
 requests
+playwright
 
 # install cmd requirement.txt
-## pip install -r requirements.txt
+## pip install -r Requirements.txt
+## python -m playwright install chromium
