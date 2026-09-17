@@ -35,3 +35,29 @@ python -m src.adiparva_translation.html_to_json
 ```
 
 Custom directories can be supplied with `--input-dir` and `--output-dir`.
+
+## Translate JSON incrementally
+
+The translation runner reads one file from `data/output` at a time, converts
+its verses into a DataFrame, prints each completed translation, and appends
+each row immediately to a CSV table:
+
+```powershell
+python -m src.adiparva_translation.sanskrittoenglish
+```
+
+Outputs are written separately for each source file:
+
+```text
+data/translated/english/<source-name>.csv
+data/translated/nepali/<source-name>.csv
+```
+
+Each row is one translated verse, so completed rows remain saved if the run
+is interrupted. Rows use compact join keys instead of repeating parent
+objects:
+
+```json
+source_file,parva_number,chapter_number,reference,verse_number,variant,rsn,text,translation
+source.html,18,1,18-1-1,1,false,,"...","..."
+```
